@@ -25,12 +25,12 @@ int main() {
     auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
     world.add(make_shared<sphere>(point3(0,-1000,0), 1000, ground_material));
 
-    auto mat_U = make_shared<lambertian>(color(0.2, 0.3, 0.8)); // Azul difuso
-    auto mat_F = make_shared<metal>(color(0.8, 0.6, 0.2), 0.1); // Dourado polido
-    auto mat_S = make_shared<dielectric>(1.5);                   // Vidro
-    auto mat_C = make_shared<lambertian>(color(0.8, 0.2, 0.2)); // Vermelho difuso
-    auto mat_A = make_shared<metal>(color(0.8, 0.8, 0.8), 0.0); // Prata espelhado
-    auto mat_R = make_shared<lambertian>(color(0.2, 0.8, 0.3)); // Verde difuso
+    auto mat_U = make_shared<lambertian>(color(0.2, 0.3, 0.8));
+    auto mat_F = make_shared<metal>(color(0.8, 0.6, 0.2), 0.1); 
+    auto mat_S = make_shared<dielectric>(1.5);                   
+    auto mat_C = make_shared<lambertian>(color(0.8, 0.2, 0.2)); 
+    auto mat_A = make_shared<metal>(color(0.8, 0.8, 0.8), 0.0); 
+    auto mat_R = make_shared<lambertian>(color(0.2, 0.8, 0.3)); 
     
     const double r = 0.4;
 
@@ -97,14 +97,14 @@ int main() {
     world.add(make_shared<sphere>(point3(9.6, r+1*2*r, 0), r, mat_R));
     world.add(make_shared<sphere>(point3(10.2, r, 0), r, mat_R));
 
-    // Adiciona esferas aleatórias para enriquecer a cena
+    // Adiciona esferas aleatórias
     for (int i = 0; i < 100; i++) {
         double radius = random_double(0.2, 0.35);
         double z_pos;
         if (random_double() < 0.5) {
-            z_pos = random_double(1.0, 15.0); // Na frente das letras
+            z_pos = random_double(1.0, 15.0); 
         } else {
-            z_pos = random_double(-15.0, -1.0); // Atrás das letras
+            z_pos = random_double(-15.0, -1.0); 
         }
         point3 center(random_double(-15, 15), radius, z_pos);
         shared_ptr<material> sphere_material;
@@ -121,12 +121,8 @@ int main() {
         }
         world.add(make_shared<sphere>(center, radius, sphere_material));
     }
-    // ==================================================================================
-    // FIM DO CÓDIGO DAS LETRAS E ESFERAS
-    // ==================================================================================
 
-
-    // --- Configuração da Câmera ---
+    // Configuração da Câmera
     camera cam;
 
     cam.aspect_ratio      = 16.0 / 9.0;
@@ -135,7 +131,6 @@ int main() {
     cam.max_depth         = 50;
 
     cam.vfov     = 25;
-    // Posição da câmera e ponto de foco movidos para a direita para centralizar a palavra
     cam.lookfrom = point3(1.1, 4, 28);   
     cam.lookat   = point3(1.1, 1.5, 0);  
     cam.vup      = vec3(0,1,0);
